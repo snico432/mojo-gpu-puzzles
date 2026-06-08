@@ -20,8 +20,11 @@ def add_10_blocks(
     a: UnsafePointer[Scalar[dtype], MutAnyOrigin],
     size: Int,
 ):
+    # 4 * 0 + thread_idx.x -> [0, 1, 2, 3]
+    # 4 * 1 + thread_idx.x -> [4, 5, 6, 7]
     var i = block_dim.x * block_idx.x + thread_idx.x
-    # FILL ME IN (roughly 2 lines)
+    if i < size:
+        output[i] = a[i] + 10.0
 
 
 # ANCHOR_END: add_10_blocks
